@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SIM(3)-equivariant completion, a network architectural equivariant to similarity transforms.">
+  <meta name="keywords" content="Point cloud completion, Equivariant vision">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Generalizable Shape Completion with SIM(3) Equivariance</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script>
+  MathJax = {
+    tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] }
+  };
+</script>
+<script id="MathJax-script" async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.125.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.125.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.125.0/examples/js/loaders/OBJLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.125.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.125.0/examples/js/loaders/DRACOLoader.js"></script>
+<script src="./static/js/viewer.js" defer></script>
+</head>
+<body>
+
+<!-- Navigation bar (currently disabled) -->
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation"> ... </nav> -->
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Learning Generalizable Shape Completion with SIM(3) Equivariance</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/yuqing-wang-36313b263/">Yuqing Wang</a><sup>1*</sup>,</span>
+            <span class="author-block">
+              <a href="https://chenzhaiyu.com">Zhaiyu Chen</a><sup>1,2*</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.asg.ed.tum.de/sipeo/team/zhu/">Xiao Xiang Zhu</a><sup>1,2</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Technical University of Munich,</span>
+            <span class="author-block"><sup>2</sup>Munich Center for Machine Learning</span>
+            <br>NeurIPS 2025<br>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Video Link -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Demo Link -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <img
+                      src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googlecolab.svg"
+                      alt="Colab"
+                      style="
+                        /* turn the black SVG into white */
+                        filter: brightness(0) invert(1);
+                      "
+                    />
+                  </span>
+                  <span>Demo</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img id="teaser" style="width: 80%; height: auto; display: block; margin: 0 auto;" src="./static/images/teaser.png" alt="PaCo teaser figure"/>
+      <h2 class="subtitle has-text-centered" style="font-size: 0.9rem;">
+        <strong>Three paradigms for shape completion.</strong>
+Explicit canonicalization, including SO(3)‐ and SE(3)‐equivariant variants, leak pose and scale cues and fail on non-canonical inputs. 
+Data augmentation mitigates the alignment bias but incurs ambiguity. 
+We present a SIM(3)‐equivariant approach that generalizes to arbitrary similarity transforms.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract -->
+    <div class="columns is-centered has-text-centered" style="font-size: 0.9rem;">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Overview</h2>
+        <div class="content has-text-justified">
+          <p>
+            3D shape completion methods typically assume scans are pre-aligned to a canonical frame. 
+            This leaks pose and scale cues that networks may exploit to memorize absolute positions rather than inferring intrinsic geometry.
+            When such alignment is absent in real data, performance collapses. 
+            We argue that robust generalization demands architectural equivariance to the similarity group, SIM(3), so the model remains agnostic to pose and scale. 
+            Following this principle, we introduce the first SIM(3)-equivariant shape completion network, whose modular layers successively canonicalize features, reason over similarity-invariant geometry, and restore the original frame. 
+            Under a de-biased evaluation protocol that removes the hidden cues, our model outperforms both equivariant and augmentation baselines on the PCN benchmark. 
+            It also sets new cross-domain records on real driving and indoor scans, lowering minimal matching distance on KITTI by 17% and Chamfer distance <span>\(\ell_1\)</span> on OmniObject3D by 14%. 
+            Perhaps surprisingly, ours under the stricter protocol still outperforms competitors under their biased settings. 
+            These results establish full SIM(3) equivariance as an effective route to truly generalizable shape completion.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract -->
+
+    <!-- Paper video -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/-naMbdWMBNE?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video -->
+  </div>
+</section>
+
+
+
+<!-- Comparison Section -->
+<hr>
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4" style="text-align: center;">Comparison with other methods</h2>
+
+    <!-- Shared 3D Viewer -->
+    <div id="shared-viewer" style="
+      width:100%; 
+      height:600px; 
+      background:#fff; 
+      margin-bottom:40px; 
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+      border-radius:12px; 
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      position:relative;
+    ">
+   
+
+
+    <!-- Loader -->
+    <div id="loader" style="
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      font-size:14px;
+      text-align:center;
+      color:#555;
+      display:none;
+    ">
+      <div style="margin-bottom:8px;">Loading...</div>
+      <div style="width:200px;height:6px;background:#ddd;position:relative;border-radius:3px;overflow:hidden;">
+        <div id="progress" style="width:0%;height:100%;background:#76b852;"></div>
+      </div>
+    </div>
+
+    <!-- Tips box -->
+      <div id="tips-box" style="
+    position:absolute; 
+    top:10px; 
+    right:10px; 
+    background:#eaffd5; 
+    border-radius:6px; 
+    padding:6px 10px; 
+    font-size:12px; 
+    color:#333; 
+    line-height:1.4; 
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    cursor:pointer;
+  ">
+    💡 <b>Tips</b>
+    <div id="tips-content" style="display:none; margin-top:4px;">
+      ● <b>Zoom</b> - Scroll mouse wheel or pinch<br>
+      ● <b>Rotate</b> - Left drag<br>
+    </div>
+  </div>
+
+<script>
+  const tipsBox = document.getElementById("tips-box");
+  const tipsContent = document.getElementById("tips-content");
+
+  tipsBox.addEventListener("click", () => {
+    if (tipsContent.style.display === "none") {
+      tipsContent.style.display = "block"; // Expand
+    } else {
+      tipsContent.style.display = "none";  // Collapse
+    }
+  });
+</script>
+
+
+    <!-- Viewer placeholder -->
+    <div style="
+    position:absolute; 
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%); 
+    background:#eaffd5; 
+    padding:6px 10px; 
+    border-radius:6px; 
+    font-size:13px; 
+    color:#333;
+  " id="viewer-placeholder">
+    Click an image below to view in 3D
+  </div>
+ </div>
+
+  
+    <div id="gallery-wrapper" style="position:relative; display:inline-block;">
+    <!-- Puzzle-style gallery image -->
+    <img id="gallery" src="./static/images/pcn.png"  style="width:100%; cursor:pointer; margin-top:40px;">
+      <div id="highlight-box"></div>
+</div>
+  </div>
+
+</section>
+
+<hr>
+<section class="hero architecture">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4" style="text-align: center;">How it works</h2>
+    <div class="hero-body">
+      <img id="architecture" style="width: 100%; height: auto; display: block; margin: 0 auto;" src="./static/images/architecture.png" alt="PaCo architecture"/>
+      <h2 class="subtitle" style="font-size: 0.9rem;">
+        <strong>Overview of our $\mathrm{SIM}(3)$-equivariant shape completion pipeline.</strong> 
+        We extract point patch features with VN-DGCNN and feed them into a Transformer encoder-decoder. 
+        Within each layer module, we $(i)$ canonicalize features to be translation- and scale-invariant, 
+        $(ii)$ reason intrinsic geometry via $\mathrm{SIM}(3)$-invariant attention, 
+        and $(iii)$ restore the original transform. 
+        This guarantees that both intermediate features and the reconstructed shape adhere to SIM(3) transforms.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code></code></pre>
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website template from <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> 
+              and licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA-4.0</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
