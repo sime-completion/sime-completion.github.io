@@ -163,14 +163,14 @@ We present a SIM(3)‐equivariant approach that generalizes to arbitrary similar
     <!--/ Abstract -->
 
     <!-- Paper video -->
-    <div class="columns is-centered has-text-centered">
+    <!-- <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <div class="publication-video">
           <iframe src="https://www.youtube.com/embed/-naMbdWMBNE?rel=0&amp;showinfo=0"
                   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
       </div>
-    </div>
+    </div> -->
     <!--/ Paper video -->
   </div>
 </section>
@@ -278,7 +278,7 @@ We present a SIM(3)‐equivariant approach that generalizes to arbitrary similar
 </section>
 
 <hr>
-<section class="hero architecture">
+<!-- <section class="hero architecture">
   <div class="container is-max-desktop">
     <h2 class="title is-4" style="text-align: center;">How it works</h2>
     <div class="hero-body">
@@ -293,8 +293,26 @@ We present a SIM(3)‐equivariant approach that generalizes to arbitrary similar
       </h2>
     </div>
   </div>
+</section> -->
+<section class="hero architecture">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4" style="text-align: center;">How it works</h2>
+    <div class="hero-body">
+      <img id="architecture" style="width: 100%; height: auto; display: block; margin: 0 auto;" src="./static/images/architecture.png" alt="PaCo architecture"/>
+      <h2 class="subtitle" style="font-size: 0.9rem; line-height:1.5;">
+        <strong>Overview of our $\mathrm{SIM}(3)$-equivariant shape completion pipeline.</strong> 
+        We extract point patch features with <span style="color:#bcb6b5; font-weight:bold;">VN-DGCNN</span> 
+        and feed them into a Transformer encoder-decoder. 
+        Within each layer module, we 
+       $(i)$<span style="color:#5687a8; font-weight:bold;"> canonicalize features</span> to be translation- and scale-invariant, 
+        $(ii)$ <span style="color:#4cb244; font-weight:bold;">reason intrinsic geometry</span> via $\mathrm{SIM}(3)$-invariant attention, 
+        and $(iii)$<span style="color:#a85ec7; font-weight:bold;"> restore the original transform</span>. 
+        This guarantees that both intermediate features and the reconstructed shape adhere to 
+        <span style="color:#bc8845; font-weight:bold;">SIM(3) transforms</span>.
+      </h2>
+    </div>
+  </div>
 </section>
-
 
 
 <section class="section" id="BibTeX">
