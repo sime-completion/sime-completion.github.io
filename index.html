@@ -142,7 +142,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img id="teaser" style="width: 80%; height: auto; display: block; margin: 0 auto;" src="./static/images/teaser.png" alt="PaCo teaser figure"/>
+      <img id="teaser" style="width: 80%; height: auto; display: block; margin: 0 auto;" src="./static/images/teaser.png" alt="SimeCo teaser figure"/>
       <h2 class="subtitle has-text-left" style="font-size: 0.9rem;">
         <strong>Three paradigms for shape completion.</strong>
 Explicit canonicalization, including SO(3)‐ and SE(3)‐equivariant variants, leak pose and scale cues and fail on non-canonical inputs. 
@@ -199,7 +199,7 @@ We present a SIM(3)‐equivariant approach that generalizes to arbitrary similar
   <h2 class="title is-4" style="text-align: center;">Comparison with other methods</h2>
   <div class="container is-max-desktop">
     <div class="hero-body">
-<img id="teaser" style="width: 100%; height: auto; display: block; margin: 0 auto;" src="./static/images/perturbation.png" alt="PaCo teaser figure"/>
+<img id="perturbation" style="width: 100%; height: auto; display: block; margin: 0 auto;" src="./static/images/perturbation.png" alt="SimeCo teaser figure"/>
 <h2 class="subtitle has-text-left" style="font-size: 0.9rem;">
 <strong>Robustness to pose and scale perturbations.</strong> Under larger pose and scale changes, our SIM(3)-equivariant model maintains completion quality, whereas competing methods degrade.
 </h2>
@@ -298,8 +298,7 @@ We present a SIM(3)‐equivariant approach that generalizes to arbitrary similar
     <!-- Puzzle-style gallery image -->
     <img id="gallery" src="./static/images/pcn.png"  style="width:100%; cursor:pointer; margin-top:40px;">
     <h2 class="subtitle has-text-left" style="font-size: 0.9rem;">
-<strong> Comparison on PCN.</strong> Our SIM(3)-equivariant model outperforms other equivariant meth-
-ods restricted to SO(3) and SE(3) and non-equivariant baseline trained with SIM(3) augmentation.
+<strong> Comparison on PCN.</strong> Our SIM(3)-equivariant model outperforms other equivariant methods restricted to SO(3) and SE(3) and non-equivariant baseline trained with SIM(3) augmentation.
 </h2>
       <div id="highlight-box"></div>
 </div>
@@ -308,7 +307,7 @@ ods restricted to SO(3) and SE(3) and non-equivariant baseline trained with SIM(
 
   <div class="container is-max-desktop">
     <div class="hero-body">  
-      <img id="table1" style="width: 100%; height: auto; display: block; margin: 0 auto;" src="./static/images/table1.png" alt="PaCo teaser figure"/>
+      <img id="table1" style="width: 100%; height: auto; display: block; margin: 0 auto;" src="./static/images/table1.png" alt="SimeCo teaser figure"/>
       <h2 class="subtitle has-text-left" style="font-size: 0.9rem;">
         <strong>Evaluation on PCN.</strong> We compare methods supporting only SO(3) (top) and SE(3) (middle),
 and those with SIM(3) augmentation (bottom). “Transform” indicate train/test settings. Our model
@@ -320,7 +319,7 @@ values are scaled by a factor of 1000. Bold numbers indicate the best SIM(3) res
 
     <div class="container is-max-desktop">
     <div class="hero-body">  
-      <img id="generalization" style="width: 60%; height: auto; display: block; margin: 0 auto;" src="./static/images/generalization.png" alt="PaCo teaser figure"/>
+      <img id="generalization" style="width: 60%; height: auto; display: block; margin: 0 auto;" src="./static/images/generalization.png" alt="SimeCo teaser figure"/>
       <h2 class="subtitle has-text-left" style="font-size: 0.9rem;">
         <strong>Cross-domain generalization to real scans. </strong> Our PCN-trained model completes driving (KITTI) and indoor (OmniObject3D) scans, with more details than the augmented baseline.
       </h2>
@@ -329,7 +328,7 @@ values are scaled by a factor of 1000. Bold numbers indicate the best SIM(3) res
 
     <!-- <div class="container is-max-desktop">
     <div class="hero-body">  
-      <img id="table2" style="width: 50%; height: auto; display: block; margin: 0 auto;" src="./static/images/table2.png" alt="PaCo teaser figure"/>
+      <img id="table2" style="width: 50%; height: auto; display: block; margin: 0 auto;" src="./static/images/table2.png" alt="SimeCo teaser figure"/>
       <h2 class="subtitle has-text-left" style="font-size: 0.9rem;">
         Under larger pose and scale changes, our SIM(3)-equivariant model maintains completion quality, whereas competing methods degrade.
       </h2>
@@ -338,7 +337,7 @@ values are scaled by a factor of 1000. Bold numbers indicate the best SIM(3) res
 
       <div class="container is-max-desktop">
     <div class="hero-body">  
-      <img id="table3" style="width: 100%; height: auto; display: block; margin: 0 auto;" src="./static/images/table3.png" alt="PaCo teaser figure"/>
+      <img id="table3" style="width: 100%; height: auto; display: block; margin: 0 auto;" src="./static/images/table3.png" alt="SimeCo teaser figure"/>
       <h2 class="subtitle has-text-left" style="font-size: 0.9rem;">
         Under larger pose and scale changes, our SIM(3)-equivariant model maintains completion quality, whereas competing methods degrade.
       </h2>
@@ -353,7 +352,7 @@ values are scaled by a factor of 1000. Bold numbers indicate the best SIM(3) res
   <div class="container is-max-desktop">
     <h2 class="title is-4" style="text-align: center;">How it works</h2>
     <div class="hero-body">
-      <img id="architecture" style="width: 100%; height: auto; display: block; margin: 0 auto;" src="./static/images/architecture.png" alt="PaCo architecture"/>
+      <img id="architecture" style="width: 100%; height: auto; display: block; margin: 0 auto;" src="./static/images/architecture.png" alt="SimeCo architecture"/>
       <h2 class="subtitle" style="font-size: 0.9rem;">
         <strong>Overview of our $\mathrm{SIM}(3)$-equivariant shape completion pipeline.</strong> 
         We extract point patch features with VN-DGCNN and feed them into a Transformer encoder-decoder. 
@@ -369,7 +368,7 @@ values are scaled by a factor of 1000. Bold numbers indicate the best SIM(3) res
   <div class="container is-max-desktop">
     <h2 class="title is-4" style="text-align: center;">How it works</h2>
     <div class="hero-body">
-      <img id="architecture" style="width: 100%; height: auto; display: block; margin: 0 auto;" src="./static/images/architecture.png" alt="PaCo architecture"/>
+      <img id="architecture" style="width: 100%; height: auto; display: block; margin: 0 auto;" src="./static/images/architecture.png" alt="SimeCo architecture"/>
       <h2 class="subtitle" style="font-size: 0.9rem; line-height:1.5;">
         <strong>Overview of our $\mathrm{SIM}(3)$-equivariant shape completion pipeline.</strong> 
         We extract point patch features with VN-DGCNN and feed them into a Transformer encoder-decoder. 
